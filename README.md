@@ -107,3 +107,29 @@ credentials.
 | `storage.py` | Azure Blob access via managed identity |
 | `plots.py`, `viz_extra.py`, `flow.py` | Dark-themed figures and the pipeline flow strip |
 
+## Methodology notes
+
+- **Leak safety.** Every learning step (scaler, CSP, classifier) lives in one
+  scikit-learn `Pipeline`, re-fit per fold. Windows carry their trial id so
+  `GroupKFold` never splits one trial across train and test. Validated with a
+  null (label-shuffle) test.
+- **CSP** uses Ledoit-Wolf regularisation, since the data is rank-deficient after
+  average reference and ICA.
+- **Bands.** Mu (8–12 Hz) and beta (12–30 Hz) are the reported bands for motor
+  imagery. Higher-frequency claims are avoided here because of EMG-contamination
+  risk.
+
+## Data & licence
+
+This project does not redistribute the dataset. BCI Competition IV 2a is
+available from the [BNCI Horizon 2020 archive](http://bnci-horizon-2020.eu/database/data-sets)
+(dataset 001-2014) under CC BY-ND 4.0. Please cite the original dataset authors
+if you use it.
+
+The code in this repository is released under the MIT Licence — see `LICENSE`.
+
+## Author
+
+Ibrahim Koukash — PhD candidate, Mechanical Engineering, Kyushu University.
+Research in AI, biosignal processing, and human–robot interaction for assistive
+technology.
