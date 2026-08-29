@@ -88,7 +88,7 @@ def flow_svg(stages, frac):
         if i < n - 1:
             ax0 = x + box_w + 4
             ax1 = x + box_w + gap - 4
-            on = frac >= thr           # arrow lights once this stage is done
+            on = frac >= thr # arrow lights once this stage is done
             col = _C["arrow_on"] if on else _C["arrow_off"]
             parts.append(
                 f'<line x1="{ax0}" y1="{cy}" x2="{ax1-6}" y2="{cy}" '
