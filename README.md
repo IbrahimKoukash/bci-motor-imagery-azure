@@ -47,7 +47,7 @@ and motor-imagery window, and run cleaning end to end.
 **2 · Decode & compare** — pick any feature extractors and classifiers, set the
 window, and score every pairing.
 
-![Decode tab](docs/tab2_decode_controls.png)
+<img width="676" height="863" alt="image" src="https://github.com/user-attachments/assets/3bf56b78-b0f5-4d26-a9fe-1f3360cc6831" />
 
 **3 · Advanced** — tune per-method parameters; settings are fixed across the
 whole comparison so every pairing is judged on the same footing.
