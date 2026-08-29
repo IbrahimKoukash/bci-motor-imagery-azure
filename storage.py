@@ -10,7 +10,7 @@ import tempfile
 from functools import lru_cache
 
 # IDs 
-_DEFAULT_ACCOUNT_URL = "https://kyudaideeptechstorage.blob.core.windows.net" # Default account rg-kyudai-deeptech
+_DEFAULT_ACCOUNT_URL = "" # Default account rg-kyudai-deeptech
 ACCOUNT_URL = os.environ.get("BLOB_ACCOUNT_URL", _DEFAULT_ACCOUNT_URL).strip() # Blob account URL env var. If empty string -> local-only
 
 # local-only = 1 forces Blob off entirely (pure local dev with no Azure)
