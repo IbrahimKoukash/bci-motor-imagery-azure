@@ -61,3 +61,49 @@ across the bundled cache with no upload needed.
 
 <img width="383" height="615" alt="image" src="https://github.com/user-attachments/assets/b5195946-5c3a-4ca5-b416-41dd9cae348c" />
 
+## Architecture
+
+| Layer | Service | Role |
+|-------|---------|------|
+| UI + compute | Azure App Service (Linux container) | Runs the Streamlit app and the MNE pipeline |
+| Image | Azure Container Registry | Holds the built container image |
+| Persistence | Azure Blob Storage | One Parquet file per sweep run |
+| Identity | Microsoft Entra ID | App authenticates to storage via managed identity — no keys in code |
+| Analytics | Microsoft Fabric + Power BI | Lakehouse table and cross-subject dashboard |
+
+The app degrades gracefully: if Blob storage is unreachable it still runs and is
+fully demoable, results just aren't persisted (`LOCAL_ONLY=1` forces this).
+
+## Running locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# get the dataset (.mat files) from the BNCI Horizon 2020 archive:
+# http://bnci-horizon-2020.eu/database/data-sets (dataset 001-2014)
+
+# pre-cache subjects once so the sweep tab is fast (optional):
+python cache_subjects.py --data-dir path/to/BCICIV-2a-mat
+
+LOCAL_ONLY=1 streamlit run app_streamlit.py
+```
+`LOCAL_ONLY=1` disables Azure Blob entirely, so you can run with no cloud
+credentials.
+
+## Project layout
+
+| File | Purpose |
+|------|---------|
+| `app_streamlit.py` | Main four-tab UI |
+| `pipeline.py` | Load → filter → ICA → epoch → ERD-crop preprocessing |
+| `decoding.py` | Windowing, the eight feature extractors, leak-safe pipeline |
+| `decoding_algorithms.py` | Registers the five classifiers, confusion-matrix eval |
+| `decoding_params.py`, `params.py`, `advanced_ui.py` | Parameter-aware pipeline + Advanced tab |
+| `comparison.py` | Feature × classifier grid, writes Fabric-ready Parquet |
+| `sweep_tab.py`, `sweep_all_subjects.py` | Cross-subject sweep (in-app and offline batch) |
+| `cache_subjects.py` | One-off offline preprocessing cache |
+| `storage.py` | Azure Blob access via managed identity |
+| `plots.py`, `viz_extra.py`, `flow.py` | Dark-themed figures and the pipeline flow strip |
+
