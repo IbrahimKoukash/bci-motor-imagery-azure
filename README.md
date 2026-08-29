@@ -44,19 +44,20 @@ appear once a run completes.
 **1 · Preprocess** — load a bundled example or upload a `.mat`, set the filter
 and motor-imagery window, and run cleaning end to end.
 
+<img width="417" height="532" alt="image" src="https://github.com/user-attachments/assets/979283f8-f013-4ae5-9c0e-298336b0a2b0" />
+
 **2 · Decode & compare** — pick any feature extractors and classifiers, set the
 window, and score every pairing.
 
-<img width="676" height="863" alt="image" src="https://github.com/user-attachments/assets/3bf56b78-b0f5-4d26-a9fe-1f3360cc6831" />
+<img width="469" height="550" alt="image" src="https://github.com/user-attachments/assets/7daabfaf-76cd-4700-a229-178f0a5a2b34" />
 
 **3 · Advanced** — tune per-method parameters; settings are fixed across the
 whole comparison so every pairing is judged on the same footing.
 
-![Advanced tab](docs/tab3_advanced.png)
+<img width="730" height="281" alt="image" src="https://github.com/user-attachments/assets/f547b2bb-69c3-4a0e-bbbf-44ec2baf8bff" />
 
 **4 · Cross-subject sweep** — pick subjects, features and classifiers, and sweep
 across the bundled cache with no upload needed.
 
-![Cross-subject sweep tab](docs/tab4_sweep_controls.png)
-
+<img width="383" height="615" alt="image" src="https://github.com/user-attachments/assets/b5195946-5c3a-4ca5-b416-41dd9cae348c" />
 
